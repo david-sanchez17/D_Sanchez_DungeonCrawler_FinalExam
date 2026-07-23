@@ -84,7 +84,6 @@ public class PlayerController : MonoBehaviour
         if (Quaternion.Angle(transform.rotation, targetRotation) < 0.1f)
         {
             transform.rotation = targetRotation;
-
             if (Vector3.Distance(transform.position, targetPosition) < 0.01f)
                 isMoving = false;
         }
