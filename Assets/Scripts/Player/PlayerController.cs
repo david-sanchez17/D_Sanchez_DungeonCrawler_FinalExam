@@ -11,6 +11,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float turnAngle = 90f;
     [SerializeField] private float turnSpeed = 360f;
 
+    [Header("Collisions")]
+    [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private Vector3 boxHalfExtents = new Vector3(0.4f, 0.9f, 0.4f);
+
     private bool isMoving = false;
 
     private Vector3 targetPosition;
@@ -36,23 +40,19 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetButtonDown("Forward"))
         {
-            targetPosition += transform.forward * moveDistance;
-            isMoving = true;
+            TryMove(transform.forward);
         }
         else if (Input.GetButtonDown("Backward"))
         {
-            targetPosition -= transform.forward * moveDistance;
-            isMoving = true;
+            TryMove(-transform.forward);
         }
         else if (Input.GetButtonDown("StrafeLeft"))
         {
-            targetPosition -= transform.right * moveDistance;
-            isMoving = true;
+            TryMove(-transform.right);
         }
         else if (Input.GetButtonDown("StrafeRight"))
         {
-            targetPosition += transform.right * moveDistance;
-            isMoving = true;
+            TryMove(transform.right);
         }
         else if (Input.GetButtonDown("TurnLeft"))
         {
@@ -87,6 +87,28 @@ public class PlayerController : MonoBehaviour
 
             if (Vector3.Distance(transform.position, targetPosition) < 0.01f)
                 isMoving = false;
+        }
+    }
+
+    private void TryMove(Vector3 direction)
+    {
+        Vector3 destination = transform.position + direction * moveDistance;
+
+        Collider[] hitObjects = Physics.OverlapBox(
+            destination,
+            boxHalfExtents,
+            Quaternion.identity,
+            wallLayer);
+
+
+        if (hitObjects.Length == 0)
+        {
+            targetPosition = destination;
+            isMoving = true;
+        }
+        else
+        {
+            Debug.Log("Cannot move. Wall detected.");
         }
     }
 }
