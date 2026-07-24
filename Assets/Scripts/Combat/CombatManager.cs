@@ -1,14 +1,22 @@
+using NUnit.Framework;
 using UnityEngine;
 
 public class CombatManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public enum CombatState
+    {
+        PlayerTurn,
+        EnemyTurn,
+        Victory, 
+        Defeat,
+    }
+
+    [SerializeField] private List<PlayerCombatController> players = new List<PlayerCombatController>();
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
