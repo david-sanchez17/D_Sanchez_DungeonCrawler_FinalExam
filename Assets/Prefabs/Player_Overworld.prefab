@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 4934759767103172022}
   - component: {fileID: 3809451528884486356}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player_Overworld
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

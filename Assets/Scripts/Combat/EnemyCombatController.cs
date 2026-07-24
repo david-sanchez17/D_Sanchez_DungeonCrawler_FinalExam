@@ -41,11 +41,36 @@ public class EnemyCombatController : MonoBehaviour
             currentHealth = 0;
             Die();
         }
- 
     }
 
-    void Update()
+    private void Die()
     {
-        
+        Debug.Log(enemyName + " has been defeated.");
+        Destroy(gameObject);
+    }
+
+    public bool IsAlive()
+    {
+        return currentHealth > 0;
+    }
+
+    public int GetHealth()
+    {
+        return currentHealth;
+    }
+
+    public int GetAttack()
+    {
+        return attackPower;
+    }
+
+    public int GetDefense()
+    {
+        return defense;
+    }
+
+    public string GetEnemyName()
+    {
+        return enemyName;
     }
 }
