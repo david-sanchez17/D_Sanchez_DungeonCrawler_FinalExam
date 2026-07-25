@@ -11,6 +11,8 @@ public class EnemySpawner : MonoBehaviour
     [Header("Spawning")]
     [SerializeField] private int enemiesToSpawn = 3;
 
+    
+
 
     /// <summary>
     /// Spawns specified number of enemies
@@ -34,12 +36,8 @@ public class EnemySpawner : MonoBehaviour
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
         Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
     }
-
-
-
     private void Start()
     {
         SpawnEnemies();
-
     }
 }

@@ -25,7 +25,7 @@ public class EnemyCombatController : MonoBehaviour
         damage = Mathf.Max(1, damage);
         player.TakeDamage(damage);
 
-        Debug.Log(enemyName + "attacks " + player.GetPlayerName() + " for " + damage + " damage.");
+        Debug.Log(enemyName + " attacks " + player.GetPlayerName() + " for " + damage + " damage.");
     }
 
     public void TakeDamage(int damage)

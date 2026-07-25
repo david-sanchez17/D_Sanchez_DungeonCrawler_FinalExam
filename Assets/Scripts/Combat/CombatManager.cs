@@ -1,102 +1,209 @@
-using NUnit.Framework;
-using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using NUnit.Framework;
+using Unity.VisualScripting;
+using UnityEngine;
 
 public class CombatManager : MonoBehaviour
 {
+
     public enum CombatState
     {
         PlayerTurn,
         EnemyTurn,
-        Victory, 
-        Defeat,
+        Victory,
+        Defeat
     }
 
+
+    [Header("Combatants")]
     [SerializeField] private List<PlayerCombatController> players = new List<PlayerCombatController>();
     [SerializeField] private List<EnemyCombatController> enemies = new List<EnemyCombatController>();
+
 
     private CombatState currentState;
 
 
     private void Start()
     {
+        StartCoroutine(InitializeCombat());
+    }
+
+
+    /// <summary>
+    /// Waits one frame before finding enemies.
+    /// This allows spawned enemies to finish creating.
+    /// </summary>
+    private IEnumerator InitializeCombat()
+    {
+        yield return null;
+
+
+        players.Clear();
+        enemies.Clear();
+
+
+        players.AddRange(FindObjectsByType<PlayerCombatController>());
+
+        enemies.AddRange(FindObjectsByType<EnemyCombatController>());
+
+
+        Debug.Log("Players: " + players.Count);
+        Debug.Log("Enemies: " + enemies.Count);
+
+
         currentState = CombatState.PlayerTurn;
+
         Debug.Log("Combat Begin");
+
         StartPlayerTurn();
     }
 
+
+
+    /// <summary>
+    /// Begins the player's turn.
+    /// </summary>
     private void StartPlayerTurn()
     {
         currentState = CombatState.PlayerTurn;
-        Debug.Log("Player turn");
+
+        Debug.Log("Player Turn");
     }
 
+
+
+    /// <summary>
+    /// Called by the attack button.
+    /// </summary>
     public void PlayerAttack()
     {
         if (currentState != CombatState.PlayerTurn)
             return;
+
+
         RemoveDeadEnemies();
+
 
         if (enemies.Count == 0)
         {
             Victory();
             return;
         }
+
 
         players[0].Attack(enemies[0]);
+
+
         RemoveDeadEnemies();
+
 
         if (enemies.Count == 0)
         {
             Victory();
             return;
         }
+
 
         StartEnemyTurn();
     }
 
+
+
+    /// <summary>
+    /// Starts the enemy turn.
+    /// </summary>
     private void StartEnemyTurn()
     {
-        currentState = CombatState.EnemyTurn;
-        Debug.Log("EnemyTurn");
+        StartCoroutine(EnemyTurnRoutine());
+    }
 
-        foreach (EnemyCombatController enemy in enemies)
+
+
+    /// <summary>
+    /// Handles enemy attacks one at a time.
+    /// </summary>
+    private IEnumerator EnemyTurnRoutine()
+    {
+        currentState = CombatState.EnemyTurn;
+
+
+        Debug.Log("Enemy Turn");
+
+
+        foreach (EnemyCombatController enemy in enemies.ToList())
         {
-            if (enemy.IsAlive())
+            if (enemy != null && enemy.IsAlive())
             {
                 enemy.Attack(players[0]);
+
+                yield return new WaitForSeconds(1f);
             }
         }
 
+
         RemoveDeadPlayers();
+
 
         if (players.Count == 0)
         {
             Defeat();
-            return;
+            yield break;
         }
+
+
+        yield return new WaitForSeconds(1f);
+
+
         StartPlayerTurn();
     }
 
+
+
+    /// <summary>
+    /// Removes enemies that have died.
+    /// </summary>
     private void RemoveDeadEnemies()
     {
-        enemies.RemoveAll(EnemyCombatController => !EnemyCombatController.IsAlive());
+        enemies.RemoveAll(
+            enemy => enemy == null || !enemy.IsAlive()
+        );
     }
 
+
+
+    /// <summary>
+    /// Removes players that have died.
+    /// </summary>
     private void RemoveDeadPlayers()
     {
-        players.RemoveAll(players => !players.IsAlive());
+        players.RemoveAll(
+            player => player == null || !player.IsAlive()
+        );
     }
 
+
+
+    /// <summary>
+    /// Called when all enemies are defeated.
+    /// </summary>
     private void Victory()
     {
         currentState = CombatState.Victory;
-        Debug.Log("Victory");
+
+        Debug.Log("Victory!");
     }
 
+
+
+    /// <summary>
+    /// Called when all players are defeated.
+    /// </summary>
     private void Defeat()
     {
         currentState = CombatState.Defeat;
-        Debug.Log("Defeat");
+
+        Debug.Log("Defeat!");
     }
 }
