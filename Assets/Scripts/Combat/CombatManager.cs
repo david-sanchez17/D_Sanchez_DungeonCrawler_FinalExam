@@ -32,35 +32,25 @@ public class CombatManager : MonoBehaviour
 
 
     /// <summary>
-    /// Waits one frame before finding enemies.
-    /// This allows spawned enemies to finish creating.
+    /// Waits one frame before finding enemies. This allows spawned enemies to finish creating.
     /// </summary>
     private IEnumerator InitializeCombat()
     {
         yield return null;
-
-
         players.Clear();
         enemies.Clear();
 
-
         players.AddRange(FindObjectsByType<PlayerCombatController>());
-
         enemies.AddRange(FindObjectsByType<EnemyCombatController>());
-
 
         Debug.Log("Players: " + players.Count);
         Debug.Log("Enemies: " + enemies.Count);
 
 
         currentState = CombatState.PlayerTurn;
-
         Debug.Log("Combat Begin");
-
         StartPlayerTurn();
     }
-
-
 
     /// <summary>
     /// Begins the player's turn.
@@ -72,8 +62,6 @@ public class CombatManager : MonoBehaviour
         Debug.Log("Player Turn");
     }
 
-
-
     /// <summary>
     /// Called by the attack button.
     /// </summary>
@@ -82,20 +70,14 @@ public class CombatManager : MonoBehaviour
         if (currentState != CombatState.PlayerTurn)
             return;
 
-
         RemoveDeadEnemies();
-
 
         if (enemies.Count == 0)
         {
             Victory();
             return;
         }
-
-
         players[0].Attack(enemies[0]);
-
-
         RemoveDeadEnemies();
 
 
@@ -104,12 +86,8 @@ public class CombatManager : MonoBehaviour
             Victory();
             return;
         }
-
-
         StartEnemyTurn();
     }
-
-
 
     /// <summary>
     /// Starts the enemy turn.
@@ -118,8 +96,6 @@ public class CombatManager : MonoBehaviour
     {
         StartCoroutine(EnemyTurnRoutine());
     }
-
-
 
     /// <summary>
     /// Handles enemy attacks one at a time.
@@ -151,15 +127,11 @@ public class CombatManager : MonoBehaviour
             Defeat();
             yield break;
         }
-
-
         yield return new WaitForSeconds(1f);
 
 
         StartPlayerTurn();
     }
-
-
 
     /// <summary>
     /// Removes enemies that have died.
@@ -171,8 +143,6 @@ public class CombatManager : MonoBehaviour
         );
     }
 
-
-
     /// <summary>
     /// Removes players that have died.
     /// </summary>
@@ -183,8 +153,6 @@ public class CombatManager : MonoBehaviour
         );
     }
 
-
-
     /// <summary>
     /// Called when all enemies are defeated.
     /// </summary>
@@ -194,8 +162,6 @@ public class CombatManager : MonoBehaviour
 
         Debug.Log("Victory!");
     }
-
-
 
     /// <summary>
     /// Called when all players are defeated.

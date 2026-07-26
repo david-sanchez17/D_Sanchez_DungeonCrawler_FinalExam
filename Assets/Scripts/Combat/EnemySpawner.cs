@@ -1,4 +1,6 @@
+using NUnit.Framework;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -21,19 +23,28 @@ public class EnemySpawner : MonoBehaviour
     {
         if (enemyPrefabs.Length == 0 || spawnPoints.Length == 0)
         {
+            //patch ts out later
             Debug.LogWarning("Enemyspawner is missing enemy prefabs or spawn points");
             return;
         }
+
+        //list of available spawn points
+        List<Transform> availableSpawnPoints = new List<Transform>(spawnPoints);
+
         for (int i = 0; i < enemiesToSpawn; i++)
         {
-            SpawnEnemy();
+            SpawnEnemy(availableSpawnPoints);
         }
     }
 
-    private void SpawnEnemy()
+    private void SpawnEnemy(List<Transform> availableSpawnPoints)
     {
         GameObject enemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
-        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        int randomIndex = Random.Range(0, availableSpawnPoints.Count);
+        Transform spawnPoint = availableSpawnPoints[randomIndex];
+
+        availableSpawnPoints.RemoveAt(randomIndex);
+
         Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
     }
     private void Start()
