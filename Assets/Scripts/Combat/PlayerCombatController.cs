@@ -4,7 +4,7 @@ public class PlayerCombatController : MonoBehaviour
 
     [SerializeField] private string playerName = "Knight";
     [SerializeField] private int maxHealth = 30;
-    [SerializeField] private int attackPower = 8;
+    [SerializeField] private int attackPower = 30;
     [SerializeField] private int defense = 3;
 
     private int currentHealth;

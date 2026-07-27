@@ -4,6 +4,8 @@ using System.Linq;
 using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class CombatManager : MonoBehaviour
 {
@@ -161,6 +163,7 @@ public class CombatManager : MonoBehaviour
         currentState = CombatState.Victory;
 
         Debug.Log("Victory!");
+       
     }
 
     /// <summary>
@@ -171,5 +174,7 @@ public class CombatManager : MonoBehaviour
         currentState = CombatState.Defeat;
 
         Debug.Log("Defeat!");
+        SceneManager.LoadSceneAsync("MainMenu");
+
     }
 }
