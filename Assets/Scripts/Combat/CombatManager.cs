@@ -140,9 +140,7 @@ public class CombatManager : MonoBehaviour
     /// </summary>
     private void RemoveDeadEnemies()
     {
-        enemies.RemoveAll(
-            enemy => enemy == null || !enemy.IsAlive()
-        );
+        enemies.RemoveAll(enemy => enemy == null || !enemy.IsAlive());
     }
 
     /// <summary>
@@ -150,9 +148,7 @@ public class CombatManager : MonoBehaviour
     /// </summary>
     private void RemoveDeadPlayers()
     {
-        players.RemoveAll(
-            player => player == null || !player.IsAlive()
-        );
+        players.RemoveAll(player => player == null || !player.IsAlive());
     }
 
     /// <summary>
