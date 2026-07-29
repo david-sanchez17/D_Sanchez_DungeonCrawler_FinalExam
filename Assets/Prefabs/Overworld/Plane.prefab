@@ -19,7 +19,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &5273085106368988285
 Transform:
@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7573798131507662959}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.510071, y: 0.00010007617, z: 21.79897}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.0001, z: 7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -130,39 +130,39 @@ MonoBehaviour:
   - m_Vertices: 0f000000
   m_SharedTextures: []
   m_Positions:
-  - {x: -1.97896, y: 0, z: -6}
-  - {x: -1.97896, y: 0, z: 0}
-  - {x: 0.021039963, y: 0, z: -6}
-  - {x: 0.021039963, y: 0, z: 0}
-  - {x: -1.97896, y: 0, z: 0}
-  - {x: -1.97896, y: 0, z: 6}
-  - {x: 0.021039963, y: 0, z: 0}
-  - {x: 0.021039963, y: 0, z: 6}
-  - {x: 0.021039963, y: 0, z: -6}
-  - {x: 0.021039963, y: 0, z: 0}
-  - {x: 2.02104, y: 0, z: -6}
-  - {x: 2.02104, y: 0, z: 0}
-  - {x: 0.021039963, y: 0, z: 0}
-  - {x: 0.021039963, y: 0, z: 6}
-  - {x: 2.02104, y: 0, z: 0}
-  - {x: 2.02104, y: 0, z: 6}
+  - {x: -2, y: 0, z: -3}
+  - {x: -2, y: 0, z: -1}
+  - {x: 0, y: 0, z: -3}
+  - {x: 0, y: 0, z: -1}
+  - {x: -2, y: 0, z: -1}
+  - {x: -2, y: 0, z: 1}
+  - {x: 0, y: 0, z: -1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: -3}
+  - {x: 0, y: 0, z: -1}
+  - {x: 2, y: 0, z: -3}
+  - {x: 2, y: 0, z: -1}
+  - {x: 0, y: 0, z: -1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 2, y: 0, z: -1}
+  - {x: 2, y: 0, z: 1}
   m_Textures0:
-  - {x: -1.97896, y: -6}
-  - {x: -1.97896, y: 0}
-  - {x: 0.021039963, y: -6}
-  - {x: 0.021039963, y: 0}
-  - {x: -1.97896, y: 0}
-  - {x: -1.97896, y: 6}
-  - {x: 0.021039963, y: 0}
-  - {x: 0.021039963, y: 6}
-  - {x: 0.021039963, y: -6}
-  - {x: 0.021039963, y: 0}
-  - {x: 2.02104, y: -6}
-  - {x: 2.02104, y: 0}
-  - {x: 0.021039963, y: 0}
-  - {x: 0.021039963, y: 6}
-  - {x: 2.02104, y: 0}
-  - {x: 2.02104, y: 6}
+  - {x: -2, y: -3}
+  - {x: -2, y: -1}
+  - {x: 0, y: -3}
+  - {x: 0, y: -1}
+  - {x: -2, y: -1}
+  - {x: -2, y: 1}
+  - {x: 0, y: -1}
+  - {x: 0, y: 1}
+  - {x: 0, y: -3}
+  - {x: 0, y: -1}
+  - {x: 2, y: -3}
+  - {x: 2, y: -1}
+  - {x: 0, y: -1}
+  - {x: 0, y: 1}
+  - {x: 2, y: -1}
+  - {x: 2, y: 1}
   m_Textures2: []
   m_Textures3: []
   m_Tangents:
@@ -191,7 +191,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 7731
+  m_VersionIndex: 3374
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -209,15 +209,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ProBuilder::UnityEngine.ProBuilder.Shapes.ProBuilderShape
   m_Shape:
-    rid: 6445352061906190589
+    rid: 6445352108538462309
   m_ShapeRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_UnmodifiedMeshVersion: 7731
-  m_Size: {x: 4, y: 0, z: -12}
-  m_LocalCenter: {x: 0.021039963, y: 0, z: 0}
+  m_UnmodifiedMeshVersion: 3374
+  m_Size: {x: -4, y: 0, z: 4}
+  m_LocalCenter: {x: 0, y: 0, z: -1}
   references:
     version: 2
     RefIds:
-    - rid: 6445352061906190589
+    - rid: 6445352108538462309
       type: {class: Plane, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
       data:
         m_HeightSegments: 1

@@ -3,17 +3,13 @@ using UnityEngine.SceneManagement;
 using UnityEngine.AI;
 public class EnemyEncounter : MonoBehaviour
 {
-    [SerializeField] private Transform player;
-    [SerializeField] private float moveDistance = 2f;
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float turnSpeed = 360f;
     [SerializeField] private Transform target;
 
     private NavMeshAgent agent;
     private Vector3 targetPosition;
     private Quaternion targetRotation;
 
-    private bool isMoving = false;
+
 
     private string combatSceneName = "CombatScene";
     private bool encounterStarted = false;
