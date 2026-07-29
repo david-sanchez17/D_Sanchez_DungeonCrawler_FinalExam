@@ -26,10 +26,13 @@ public class CombatManager : MonoBehaviour
 
     private CombatState currentState;
 
+    private bool waitingForTarget = false;
+
 
     private void Start()
     {
         StartCoroutine(InitializeCombat());
+
     }
 
 
@@ -60,6 +63,7 @@ public class CombatManager : MonoBehaviour
     private void StartPlayerTurn()
     {
         currentState = CombatState.PlayerTurn;
+        waitingForTarget = false;
 
         Debug.Log("Player Turn");
     }
@@ -79,9 +83,24 @@ public class CombatManager : MonoBehaviour
             Victory();
             return;
         }
-        players[0].Attack(enemies[0]);
-        RemoveDeadEnemies();
+        waitingForTarget = true;
+        Debug.Log("Select an enemy to attack");
+    }
 
+    public void SelectEnemy(EnemyCombatController selectedEnemy)
+    {
+        if (!waitingForTarget)
+            return;
+        if (selectedEnemy == null)
+            return;
+        if (!selectedEnemy.IsAlive())
+            return;
+
+        waitingForTarget = false;
+
+
+        players[0].Attack(selectedEnemy);
+        RemoveDeadEnemies();
 
         if (enemies.Count == 0)
         {
@@ -89,6 +108,11 @@ public class CombatManager : MonoBehaviour
             return;
         }
         StartEnemyTurn();
+    }
+
+    public bool IsSelectingTarget()
+    {
+        return waitingForTarget;
     }
 
     /// <summary>

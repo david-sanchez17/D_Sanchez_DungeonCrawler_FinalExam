@@ -8,6 +8,8 @@ public class EnemyCombatController : MonoBehaviour
     [SerializeField] private int attackPower = 5;
     [SerializeField] private int defense = 2;
 
+
+
     private int currentHealth;
 
     private void Start()
@@ -26,6 +28,16 @@ public class EnemyCombatController : MonoBehaviour
         player.TakeDamage(damage);
 
         Debug.Log(enemyName + " attacks " + player.GetPlayerName() + " for " + damage + " damage.");
+    }
+
+    private void OnMouseDown()
+    {
+        CombatManager combatManager = FindAnyObjectByType<CombatManager>();
+
+        if (combatManager != null)
+        {
+            combatManager.SelectEnemy(this);
+        }
     }
 
     public void TakeDamage(int damage)
