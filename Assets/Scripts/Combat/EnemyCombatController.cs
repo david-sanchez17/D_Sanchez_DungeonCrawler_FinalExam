@@ -1,5 +1,6 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyCombatController : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class EnemyCombatController : MonoBehaviour
     [SerializeField] private int attackPower = 5;
     [SerializeField] private int defense = 2;
 
+    [Header("UI")]
+    [SerializeField] private HealthBarScript healthBar;
+
 
 
     private int currentHealth;
@@ -15,6 +19,11 @@ public class EnemyCombatController : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
+
+        if (healthBar != null)
+        {
+            healthBar.Initialize(this);
+        }
     }
 
     public void Attack(PlayerCombatController player)
@@ -44,13 +53,24 @@ public class EnemyCombatController : MonoBehaviour
     {
         damage -= defense;
         damage = Mathf.Max(1, damage);
-        currentHealth -= damage;
 
-        Debug.Log(enemyName + " takes " + damage + " damage.");
+        currentHealth -= damage;
+        currentHealth = Mathf.Max(0, currentHealth);
+
+        Debug.Log(enemyName + " takes " + damage + "damage. HP remaining: " + currentHealth);
+
+        if (currentHealth < 0)
+        {
+            currentHealth = 0;
+        }
+
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealthBar();
+        }
 
         if (currentHealth <= 0)
         {
-            currentHealth = 0;
             Die();
         }
     }
@@ -58,6 +78,12 @@ public class EnemyCombatController : MonoBehaviour
     private void Die()
     {
         Debug.Log(enemyName + " has been defeated.");
+
+        if (healthBar != null)
+        {
+            Destroy(healthBar.gameObject);
+        }
+
         Destroy(gameObject);
     }
 
@@ -69,6 +95,11 @@ public class EnemyCombatController : MonoBehaviour
     public int GetHealth()
     {
         return currentHealth;
+    }
+
+    public int GetMaxHealth()
+    {
+        return maxHealth;
     }
 
     public int GetAttack()
