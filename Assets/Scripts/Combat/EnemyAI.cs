@@ -141,30 +141,4 @@ public class EnemyAI : MonoBehaviour
             }
         }
     }
-
-    private Vector3 GetCardinalDirection(Vector3 direction)
-    {
-        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.z))
-        {
-            if (direction.x > 0f)
-            {
-                return Vector3.right;
-            }
-            else
-            {
-                return Vector3.left;
-            }
-        }
-        else
-        {
-            if (direction.z > 0f)
-            {
-                return Vector3.forward;
-            }
-            else
-            {
-                return Vector3.back;
-            }
-        }
-    }
 }
