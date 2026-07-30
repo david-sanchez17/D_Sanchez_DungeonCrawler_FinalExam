@@ -4,7 +4,7 @@ using UnityEngine.AI;
 public class EnemyAI : MonoBehaviour
 {
 
-    //movement script of infinite fucking evil
+    
     [Header("References")]
     [SerializeField] private Transform player;
 
