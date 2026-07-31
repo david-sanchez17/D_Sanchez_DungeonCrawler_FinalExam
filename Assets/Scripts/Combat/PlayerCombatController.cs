@@ -1,11 +1,16 @@
 using UnityEngine;
 public class PlayerCombatController : MonoBehaviour, IHealthInterface
 {
-
+    [Header("Stats")]
     [SerializeField] private string playerName = "Knight";
     [SerializeField] private int maxHealth = 30;
     [SerializeField] private int attackPower = 30;
     [SerializeField] private int defense = 3;
+
+    [Header("Guard")]
+    [SerializeField] private int guardDefenseBonus = 5;
+    private int temporaryDefenseBonus = 0;
+    private int guardTurnsRemaining = 0;
 
     [Header("UI")]
     [SerializeField] private HealthBarScript healthBar;
@@ -33,9 +38,30 @@ public class PlayerCombatController : MonoBehaviour, IHealthInterface
         Debug.Log(playerName + " attacks " + enemy.GetEnemyName() + " for " + damage + " damage.");
     }
 
+    public void Guard()
+    {
+        temporaryDefenseBonus = guardDefenseBonus;
+        guardTurnsRemaining = 2;
+        Debug.Log(playerName + " is guarding! Defense increased by " + guardDefenseBonus + "for 2 turns");
+    }
+
+    public void EndTurn()
+    {
+        if (guardTurnsRemaining > 0)
+        {
+            guardTurnsRemaining--;
+            if (guardTurnsRemaining == 0)
+            {
+                temporaryDefenseBonus = 0;
+                Debug.Log(playerName + "'s Guard has worn off");
+            }
+        }
+    }
+
     public void TakeDamage(int damage)
     {
-        damage -= defense;
+        damage -= GetDefense();
+
         damage = Mathf.Max(1, damage);
 
         currentHealth -= damage;
@@ -83,7 +109,7 @@ public class PlayerCombatController : MonoBehaviour, IHealthInterface
 
     public int GetDefense()
     {
-        return defense;
+        return defense + temporaryDefenseBonus;
     }
 
     public string GetPlayerName()
