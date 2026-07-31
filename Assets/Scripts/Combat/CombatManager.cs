@@ -65,6 +65,11 @@ public class CombatManager : MonoBehaviour
         currentState = CombatState.PlayerTurn;
         waitingForTarget = false;
 
+        if (players.Count > 0)
+        {
+            players[0].EndTurn();
+        }
+
         Debug.Log("Player Turn");
     }
 
@@ -113,6 +118,17 @@ public class CombatManager : MonoBehaviour
     public bool IsSelectingTarget()
     {
         return waitingForTarget;
+    }
+
+
+    public void PlayerGuard()
+    {
+        if (currentState != CombatState.PlayerTurn)
+        {
+            return;
+        }
+        players[0].Guard();
+        StartEnemyTurn();
     }
 
     /// <summary>
