@@ -22,6 +22,10 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        if (BattleTransitionManager.Instance != null)
+        {
+            transform.position = BattleTransitionManager.Instance.GetReturnPosition();
+        }
         targetPosition = transform.position;
         targetRotation = transform.rotation;
     }

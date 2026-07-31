@@ -6,10 +6,7 @@ public class EnemyEncounter : MonoBehaviour
     [SerializeField] private Transform target;
 
     private NavMeshAgent agent;
-    private Vector3 targetPosition;
-    private Quaternion targetRotation;
-
-
+  
 
     private string combatSceneName = "CombatScene";
     private bool encounterStarted = false;
@@ -37,6 +34,7 @@ public class EnemyEncounter : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
+            BattleTransitionManager.Instance.SaveReturnPoint(SceneManager.GetActiveScene().name, transform.position);
             encounterStarted = true;
             Debug.Log("Enemy encountered!");
 

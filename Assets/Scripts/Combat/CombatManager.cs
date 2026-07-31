@@ -199,6 +199,7 @@ public class CombatManager : MonoBehaviour
         currentState = CombatState.Victory;
 
         Debug.Log("Victory!");
+        SceneManager.LoadScene(BattleTransitionManager.Instance.GetReturnScene());
        
     }
 
