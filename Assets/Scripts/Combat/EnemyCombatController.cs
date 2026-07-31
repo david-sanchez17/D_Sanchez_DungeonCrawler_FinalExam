@@ -57,7 +57,7 @@ public class EnemyCombatController : MonoBehaviour, IHealthInterface
         currentHealth -= damage;
         currentHealth = Mathf.Max(0, currentHealth);
 
-        Debug.Log(enemyName + " takes " + damage + "damage. HP remaining: " + currentHealth);
+        Debug.Log(enemyName + " takes " + damage + " damage. HP remaining: " + currentHealth);
 
         if (currentHealth < 0)
         {

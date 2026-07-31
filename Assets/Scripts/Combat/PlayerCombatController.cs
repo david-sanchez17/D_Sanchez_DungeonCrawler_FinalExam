@@ -15,6 +15,11 @@ public class PlayerCombatController : MonoBehaviour, IHealthInterface
     private void Start()
     {
         currentHealth = maxHealth;
+        if (healthBar != null)
+        {
+            healthBar.Initialize(this);
+        }
+       
     }
 
     public void Attack(EnemyCombatController enemy)
@@ -36,6 +41,11 @@ public class PlayerCombatController : MonoBehaviour, IHealthInterface
         currentHealth -= damage;
 
         Debug.Log(playerName + " takes " + damage + " damage.");
+
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealthBar();
+        }
 
         if (currentHealth <= 0)
         {
