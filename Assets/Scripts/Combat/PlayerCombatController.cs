@@ -1,11 +1,14 @@
 using UnityEngine;
-public class PlayerCombatController : MonoBehaviour
+public class PlayerCombatController : MonoBehaviour, IHealthInterface
 {
 
     [SerializeField] private string playerName = "Knight";
     [SerializeField] private int maxHealth = 30;
     [SerializeField] private int attackPower = 30;
     [SerializeField] private int defense = 3;
+
+    [Header("UI")]
+    [SerializeField] private HealthBarScript healthBar;
 
     private int currentHealth;
 
@@ -41,6 +44,8 @@ public class PlayerCombatController : MonoBehaviour
         }
     }
 
+
+
     private void Die()
     {
         Debug.Log(playerName + " has been defeated.");
@@ -54,6 +59,11 @@ public class PlayerCombatController : MonoBehaviour
     public int GetHealth()
     {
         return currentHealth;
+    }
+
+    public int GetMaxHealth()
+    {
+        return maxHealth;
     }
 
     public int GetAttack()

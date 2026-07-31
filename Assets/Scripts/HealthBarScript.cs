@@ -8,24 +8,23 @@ public class HealthBarScript : MonoBehaviour
     [SerializeField] private Slider healthBarSlider;
     [SerializeField] private TextMeshProUGUI healthBarValueText;
 
-    [Header("Enemy")]
-    [SerializeField] private EnemyCombatController enemy;
+    private IHealthInterface healthTarget;
 
-    public void Initialize(EnemyCombatController enemyController)
+    public void Initialize(IHealthInterface target)
     {
-        enemy = enemyController;
+        healthTarget = target;
         UpdateHealthBar();
     }
 
     public void UpdateHealthBar()
     {
-        if (enemy == null)
+        if (healthTarget == null)
         {
             return;
         }
 
-        healthBarSlider.maxValue = enemy.GetMaxHealth();
-        healthBarSlider.value = enemy.GetHealth();
-        healthBarValueText.text = enemy.GetHealth().ToString() + "/" + enemy.GetMaxHealth().ToString();
+        healthBarSlider.maxValue = healthTarget.GetMaxHealth();
+        healthBarSlider.value = healthTarget.GetHealth();
+        healthBarValueText.text = healthTarget.GetHealth().ToString() + "/" + healthTarget.GetMaxHealth().ToString();
     }
 }

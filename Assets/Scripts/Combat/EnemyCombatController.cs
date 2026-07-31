@@ -2,7 +2,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyCombatController : MonoBehaviour
+public class EnemyCombatController : MonoBehaviour, IHealthInterface
 {
     [SerializeField] private string enemyName = "Goblin";
     [SerializeField] private int maxHealth = 20;

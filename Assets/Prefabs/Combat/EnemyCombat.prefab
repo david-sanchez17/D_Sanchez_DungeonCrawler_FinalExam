@@ -693,4 +693,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthBarScript
   healthBarSlider: {fileID: 684710039465822652}
   healthBarValueText: {fileID: 7276325005050038420}
-  enemy: {fileID: 6362514789660750961}
