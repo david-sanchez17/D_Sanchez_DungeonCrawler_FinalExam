@@ -42,7 +42,7 @@ public class PlayerCombatController : MonoBehaviour, IHealthInterface
     {
         temporaryDefenseBonus = guardDefenseBonus;
         guardTurnsRemaining = 2;
-        Debug.Log(playerName + " is guarding! Defense increased by " + guardDefenseBonus + "for 2 turns");
+        Debug.Log(playerName + " is guarding! Defense increased by " + guardDefenseBonus + " for 2 turns");
     }
 
     public void EndTurn()
