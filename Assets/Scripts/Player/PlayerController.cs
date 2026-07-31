@@ -22,12 +22,21 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        if (BattleTransitionManager.Instance != null)
+        if (BattleTransitionManager.Instance != null && BattleTransitionManager.Instance.HasReturnPoint() && BattleTransitionManager.Instance.IsReturningFromBattle())
         {
-            transform.position = BattleTransitionManager.Instance.GetReturnPosition();
+            Vector3 returnPosition = BattleTransitionManager.Instance.GetReturnPosition();
+            returnPosition.y = 1f;
+            transform.position = returnPosition;
+            targetPosition = transform.position;
+            targetRotation = transform.rotation;
+            isMoving = false;
+            BattleTransitionManager.Instance.ClearReturnPoint();
         }
-        targetPosition = transform.position;
-        targetRotation = transform.rotation;
+        else
+        {
+            targetPosition = transform.position;
+            targetRotation = transform.rotation;
+        }
     }
 
     private void Update()

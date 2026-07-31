@@ -199,6 +199,8 @@ public class CombatManager : MonoBehaviour
         currentState = CombatState.Victory;
 
         Debug.Log("Victory!");
+        BattleTransitionManager.Instance.MarkEnemyDefeated(BattleTransitionManager.Instance.GetCurrentEnemy());
+        BattleTransitionManager.Instance.StartReturningFromBattle();
         SceneManager.LoadScene(BattleTransitionManager.Instance.GetReturnScene());
        
     }

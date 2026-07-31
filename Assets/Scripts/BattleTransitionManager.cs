@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BattleTransitionManager : MonoBehaviour
@@ -5,6 +6,13 @@ public class BattleTransitionManager : MonoBehaviour
     public static BattleTransitionManager Instance;
     private Vector3 returnPosition;
     private string returnSceneName;
+
+    private bool hasReturnPoint = false;
+    private bool returningFromBattle = false;
+
+    private int currentEnemyID;
+
+    private HashSet<int> defeatedEnemies = new HashSet<int>();
 
     private void Awake()
     {
@@ -23,6 +31,29 @@ public class BattleTransitionManager : MonoBehaviour
     {
         returnSceneName = sceneName;
         returnPosition = playerPosition;
+        hasReturnPoint = true;
+        returningFromBattle = false;
+    }
+
+    public bool HasReturnPoint()
+    {
+        return hasReturnPoint;
+    }
+
+    public void ClearReturnPoint()
+    {
+        hasReturnPoint = false;
+        returningFromBattle = false;
+    }
+
+    public bool IsReturningFromBattle()
+    {
+        return returningFromBattle;
+    }
+
+    public void StartReturningFromBattle()
+    {
+        returningFromBattle = true;
     }
 
     public string GetReturnScene()
@@ -35,9 +66,23 @@ public class BattleTransitionManager : MonoBehaviour
         return returnPosition;
     }
 
-    // Update is called once per frame
-    void Update()
+   public void SetCurrentEnemy(int enemyID)
     {
-        
+        currentEnemyID = enemyID;
+    }
+
+    public int GetCurrentEnemy()
+    {
+        return currentEnemyID;
+    }
+
+    public void MarkEnemyDefeated(int enemyID)
+    {
+        defeatedEnemies.Add(enemyID);
+    }
+
+    public bool IsEnemyDefeated(int enemyID)
+    {
+        return defeatedEnemies.Contains(enemyID);
     }
 }

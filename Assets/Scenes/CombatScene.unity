@@ -1222,7 +1222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombatController
   playerName: Knight
   maxHealth: 30
-  attackPower: 10
+  attackPower: 40
   defense: 3
   guardDefenseBonus: 5
   healthBar: {fileID: 1529454162}
