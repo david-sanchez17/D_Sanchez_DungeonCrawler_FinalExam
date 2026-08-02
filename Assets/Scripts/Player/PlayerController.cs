@@ -6,6 +6,9 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float moveDistance = 2f;
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private AudioClip footstepSound;
+    [SerializeField] private AudioClip turnSound;
+
 
     [Header("Rotation")]
     [SerializeField] private float turnAngle = 90f;
@@ -15,6 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private Vector3 boxHalfExtents = new Vector3(0.4f, 0.9f, 0.4f);
 
+    private AudioSource audioSource;
+
     private bool isMoving = false;
 
     private Vector3 targetPosition;
@@ -22,6 +27,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+
         if (BattleTransitionManager.Instance != null && BattleTransitionManager.Instance.HasReturnPoint() && BattleTransitionManager.Instance.IsReturningFromBattle())
         {
             Vector3 returnPosition = BattleTransitionManager.Instance.GetReturnPosition();
@@ -76,6 +83,7 @@ public class PlayerController : MonoBehaviour
         {
             targetRotation *= Quaternion.Euler(0f, turnAngle, 0f);
             isMoving = true;
+            PlaySound(turnSound);
         }
     }
 
@@ -106,21 +114,31 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 destination = transform.position + direction * moveDistance;
 
-        Collider[] hitObjects = Physics.OverlapBox(
-            destination,
-            boxHalfExtents,
-            Quaternion.identity,
-            wallLayer);
+        Collider[] hitObjects = Physics.OverlapBox(destination, boxHalfExtents, Quaternion.identity, wallLayer);
 
 
         if (hitObjects.Length == 0)
         {
             targetPosition = destination;
             isMoving = true;
+            PlaySound(footstepSound);
         }
         else
         {
             Debug.Log("Cannot move. Wall detected.");
         }
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (audioSource == null)
+        {
+            return;
+        }
+        if (clip == null)
+        {
+            return;
+        }
+        audioSource.PlayOneShot(clip);
     }
 }
