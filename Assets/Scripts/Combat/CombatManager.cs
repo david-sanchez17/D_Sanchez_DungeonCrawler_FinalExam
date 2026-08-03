@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,6 +6,7 @@ using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR;
 
 
 public class CombatManager : MonoBehaviour
@@ -28,6 +30,8 @@ public class CombatManager : MonoBehaviour
 
     private bool waitingForTarget = false;
 
+    public event Action<CombatState> OnTurnChanged;
+
 
     private void Start()
     {
@@ -39,6 +43,8 @@ public class CombatManager : MonoBehaviour
     /// <summary>
     /// Waits one frame before finding enemies. This allows spawned enemies to finish creating.
     /// </summary>
+    /// 
+   
     private IEnumerator InitializeCombat()
     {
         yield return null;
@@ -52,9 +58,19 @@ public class CombatManager : MonoBehaviour
         Debug.Log("Enemies: " + enemies.Count);
 
 
-        currentState = CombatState.PlayerTurn;
+        ChangeState(CombatState.PlayerTurn);
         Debug.Log("Combat Begin");
         StartPlayerTurn();
+    }
+
+
+    private void ChangeState(CombatState newState)
+    {
+        currentState = newState;
+        if (OnTurnChanged != null)
+        {
+            OnTurnChanged(currentState);
+        }
     }
 
     /// <summary>
@@ -62,7 +78,7 @@ public class CombatManager : MonoBehaviour
     /// </summary>
     private void StartPlayerTurn()
     {
-        currentState = CombatState.PlayerTurn;
+        ChangeState(CombatState.PlayerTurn);
         waitingForTarget = false;
 
         if (players.Count > 0)
@@ -102,7 +118,6 @@ public class CombatManager : MonoBehaviour
             return;
 
         waitingForTarget = false;
-
 
         players[0].Attack(selectedEnemy);
         RemoveDeadEnemies();
@@ -210,7 +225,7 @@ public class CombatManager : MonoBehaviour
     /// </summary>
     private void Defeat()
     {
-        currentState = CombatState.Defeat;
+        ChangeState(CombatState.Defeat);
 
         Debug.Log("Defeat!");
         SceneManager.LoadSceneAsync("MainMenu");
