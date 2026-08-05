@@ -42,6 +42,10 @@ public class PlayerCombatController : MonoBehaviour, IHealthInterface
         {
             combatManager.AddCombatLog(playerName + " attacks " + enemy.GetEnemyName() + " for " + damage + " damage.");
         }
+        if (CombatAudioManager.Instance != null)
+        {
+            CombatAudioManager.Instance.PlayPlayerAttack();
+        }
     }
 
     public void Guard()
@@ -52,6 +56,10 @@ public class PlayerCombatController : MonoBehaviour, IHealthInterface
         if (combatManager != null)
         {
             combatManager.AddCombatLog(playerName + " is guarding.");
+        }
+        if (CombatAudioManager.Instance != null)
+        {
+            CombatAudioManager.Instance.PlayPlayerGuard();
         }
     }
 
@@ -96,6 +104,10 @@ public class PlayerCombatController : MonoBehaviour, IHealthInterface
             currentHealth = 0;
             Die();
         }
+        if (CombatAudioManager.Instance != null)
+        {
+            CombatAudioManager.Instance.PlayPlayerHit();
+        }
     }
 
 
@@ -106,6 +118,10 @@ public class PlayerCombatController : MonoBehaviour, IHealthInterface
         if (combatManager != null)
         {
             combatManager.AddCombatLog(playerName + " has been defeated.");
+        }
+        if (CombatAudioManager.Instance != null)
+        {
+            CombatAudioManager.Instance.PlayPlayerDeath();
         }
     }
 

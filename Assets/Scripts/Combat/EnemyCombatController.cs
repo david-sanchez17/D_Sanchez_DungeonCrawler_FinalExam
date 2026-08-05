@@ -41,6 +41,10 @@ public class EnemyCombatController : MonoBehaviour, IHealthInterface
         {
             combatManager.AddCombatLog(enemyName + " attacks " + player.GetPlayerName() + " for " + damage + " damage.");
         }
+        if (CombatAudioManager.Instance != null)
+        {
+            CombatAudioManager.Instance.PlayEnemyAttack();
+        }
     }
 
     private void OnMouseDown()
@@ -66,6 +70,10 @@ public class EnemyCombatController : MonoBehaviour, IHealthInterface
         {
             combatManager.AddCombatLog(enemyName + " takes " + damage + " damage.");
         }
+        if (CombatAudioManager.Instance != null)
+        {
+            CombatAudioManager.Instance.PlayEnemyHit();
+        }
 
         if (currentHealth < 0)
         {
@@ -87,6 +95,11 @@ public class EnemyCombatController : MonoBehaviour, IHealthInterface
     {
         CombatManager combatManager = FindAnyObjectByType<CombatManager>();
         combatManager.AddCombatLog(enemyName + " has been defeated.");
+
+        if (CombatAudioManager.Instance != null)
+        {
+            CombatAudioManager.Instance.PlayEnemyDeath();
+        }
 
         if (healthBar != null)
         {
