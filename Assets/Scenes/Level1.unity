@@ -17,7 +17,7 @@ RenderSettings:
   m_Fog: 0
   m_FogColor: {r: 0, g: 0, b: 0, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.347
+  m_FogDensity: 0.295
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.26214847, g: 0.3099858, b: 0.4056604, a: 1}
@@ -1774,6 +1774,14 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!81 &369771843
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295122566}
+  m_Enabled: 1
 --- !u!1001 &379542346
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3086,7 +3094,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &645059077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10805,6 +10813,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8636797676322528192, guid: 4d228ca5050274c41a23abaeac17bc1c, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 9214481699487018893, guid: 4d228ca5050274c41a23abaeac17bc1c, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -10816,6 +10828,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8054210802425876391, guid: 4d228ca5050274c41a23abaeac17bc1c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 369771836}
+    - targetCorrespondingSourceObject: {fileID: 8054210802425876391, guid: 4d228ca5050274c41a23abaeac17bc1c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 369771843}
   m_SourcePrefab: {fileID: 100100000, guid: 4d228ca5050274c41a23abaeac17bc1c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

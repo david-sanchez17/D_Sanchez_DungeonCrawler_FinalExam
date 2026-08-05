@@ -16,15 +16,13 @@ public class BattleTransitionManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
+        if (Instance != null)
         {
             Destroy(gameObject);
+            return;
         }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     public void SaveReturnPoint(string sceneName, Vector3 playerPosition)

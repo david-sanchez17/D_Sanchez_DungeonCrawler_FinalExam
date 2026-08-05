@@ -31,6 +31,8 @@ public class CombatManager : MonoBehaviour
     private bool waitingForTarget = false;
 
     public event Action<CombatState> OnTurnChanged;
+    public event Action<string> OnCombatLog;
+
 
 
     private void Start()
@@ -57,8 +59,6 @@ public class CombatManager : MonoBehaviour
         Debug.Log("Players: " + players.Count);
         Debug.Log("Enemies: " + enemies.Count);
 
-
-        ChangeState(CombatState.PlayerTurn);
         Debug.Log("Combat Begin");
         StartPlayerTurn();
     }
@@ -70,6 +70,14 @@ public class CombatManager : MonoBehaviour
         if (OnTurnChanged != null)
         {
             OnTurnChanged(currentState);
+        }
+    }
+
+    public void AddCombatLog(string message)
+    {
+        if (OnCombatLog != null)
+        {
+            OnCombatLog(message);
         }
     }
 
@@ -86,7 +94,7 @@ public class CombatManager : MonoBehaviour
             players[0].EndTurn();
         }
 
-        Debug.Log("Player Turn");
+        AddCombatLog("Player Turn");
     }
 
     /// <summary>
@@ -105,7 +113,7 @@ public class CombatManager : MonoBehaviour
             return;
         }
         waitingForTarget = true;
-        Debug.Log("Select an enemy to attack");
+        AddCombatLog("Select an enemy to attack");
     }
 
     public void SelectEnemy(EnemyCombatController selectedEnemy)
@@ -159,10 +167,8 @@ public class CombatManager : MonoBehaviour
     /// </summary>
     private IEnumerator EnemyTurnRoutine()
     {
-        currentState = CombatState.EnemyTurn;
-
-
-        Debug.Log("Enemy Turn");
+        ChangeState(CombatState.EnemyTurn);
+        AddCombatLog("Enemy Turn");
 
 
         foreach (EnemyCombatController enemy in enemies.ToList())
@@ -211,9 +217,14 @@ public class CombatManager : MonoBehaviour
     /// </summary>
     private void Victory()
     {
-        currentState = CombatState.Victory;
+        ChangeState(CombatState.Victory);
 
-        Debug.Log("Victory!");
+        AddCombatLog("Victory!");
+        if (BattleTransitionManager.Instance == null)
+        {
+            Debug.LogError("BATTLE TRANSITIONER IS FUCKING NULL IN COMBATSCENE");
+                return;
+        }
         BattleTransitionManager.Instance.MarkEnemyDefeated(BattleTransitionManager.Instance.GetCurrentEnemy());
         BattleTransitionManager.Instance.StartReturningFromBattle();
         SceneManager.LoadScene(BattleTransitionManager.Instance.GetReturnScene());
@@ -227,7 +238,7 @@ public class CombatManager : MonoBehaviour
     {
         ChangeState(CombatState.Defeat);
 
-        Debug.Log("Defeat!");
+        AddCombatLog("Defeat!");
         SceneManager.LoadSceneAsync("MainMenu");
 
     }

@@ -1,18 +1,20 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class CombatLogger : MonoBehaviour
 {
-    [Header("References")]
     [SerializeField] private CombatManager combatManager;
     [SerializeField] private TextMeshProUGUI combatLogText;
-    private string logText = "";
+
+    private Queue<string> messages = new Queue<string>();
+    private const int MaxMessages = 5;
 
     private void OnEnable()
     {
-        if (combatManager != null)
+        if (combatManager !=null)
         {
-            combatManager.OnTurnChanged += LogTurnChange;
+            combatManager.OnCombatLog += AddLog;
         }
     }
 
@@ -20,23 +22,36 @@ public class CombatLogger : MonoBehaviour
     {
         if (combatManager != null)
         {
-            combatManager.OnTurnChanged -= LogTurnChange;
+            combatManager.OnCombatLog -= AddLog;
         }
     }
 
     private void OnDestroy()
     {
-        if (combatManager !=null)
+        if (combatManager != null)
         {
-            combatManager.OnTurnChanged -= LogTurnChange
+            combatManager.OnCombatLog -= AddLog;
         }
     }
-    void Start()
+
+    private void AddLog(string message)
     {
-        
+        if (messages.Count >= MaxMessages)
+        {
+            messages.Clear();
+        }
+        messages.Enqueue(message);
+        UpdateCombatLog();
     }
-    void Update()
+    
+    private void UpdateCombatLog()
     {
-        
+        combatLogText.text = "";
+        foreach(string message in messages)
+        {
+            combatLogText.text += message + "\n";
+        }
     }
+
+
 }

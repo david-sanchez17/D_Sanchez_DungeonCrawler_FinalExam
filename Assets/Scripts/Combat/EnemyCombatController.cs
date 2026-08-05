@@ -36,7 +36,11 @@ public class EnemyCombatController : MonoBehaviour, IHealthInterface
         damage = Mathf.Max(1, damage);
         player.TakeDamage(damage);
 
-        Debug.Log(enemyName + " attacks " + player.GetPlayerName() + " for " + damage + " damage.");
+        CombatManager combatManager = FindAnyObjectByType<CombatManager>();
+        if (combatManager != null)
+        {
+            combatManager.AddCombatLog(enemyName + " attacks " + player.GetPlayerName() + " for " + damage + " damage.");
+        }
     }
 
     private void OnMouseDown()
@@ -57,7 +61,11 @@ public class EnemyCombatController : MonoBehaviour, IHealthInterface
         currentHealth -= damage;
         currentHealth = Mathf.Max(0, currentHealth);
 
-        Debug.Log(enemyName + " takes " + damage + " damage. HP remaining: " + currentHealth);
+        CombatManager combatManager = FindAnyObjectByType<CombatManager>();
+        if (combatManager != null)
+        {
+            combatManager.AddCombatLog(enemyName + " takes " + damage + " damage.");
+        }
 
         if (currentHealth < 0)
         {
@@ -77,7 +85,8 @@ public class EnemyCombatController : MonoBehaviour, IHealthInterface
 
     private void Die()
     {
-        Debug.Log(enemyName + " has been defeated.");
+        CombatManager combatManager = FindAnyObjectByType<CombatManager>();
+        combatManager.AddCombatLog(enemyName + " has been defeated.");
 
         if (healthBar != null)
         {

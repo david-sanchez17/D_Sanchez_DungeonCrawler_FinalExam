@@ -35,14 +35,24 @@ public class PlayerCombatController : MonoBehaviour, IHealthInterface
         int damage = attackPower - enemy.GetDefense();
         damage = Mathf.Max(1, damage);
         enemy.TakeDamage(damage);
-        Debug.Log(playerName + " attacks " + enemy.GetEnemyName() + " for " + damage + " damage.");
+
+        CombatManager combatManager = FindAnyObjectByType<CombatManager>();
+        //yeah i know i know im an asshole my bad
+        if (combatManager != null)
+        {
+            combatManager.AddCombatLog(playerName + " attacks " + enemy.GetEnemyName() + " for " + damage + " damage.");
+        }
     }
 
     public void Guard()
     {
         temporaryDefenseBonus = guardDefenseBonus;
         guardTurnsRemaining = 2;
-        Debug.Log(playerName + " is guarding! Defense increased by " + guardDefenseBonus + " for 2 turns");
+        CombatManager combatManager = FindAnyObjectByType<CombatManager>();
+        if (combatManager != null)
+        {
+            combatManager.AddCombatLog(playerName + " is guarding.");
+        }
     }
 
     public void EndTurn()
@@ -53,7 +63,11 @@ public class PlayerCombatController : MonoBehaviour, IHealthInterface
             if (guardTurnsRemaining == 0)
             {
                 temporaryDefenseBonus = 0;
-                Debug.Log(playerName + "'s Guard has worn off");
+                CombatManager combatManager = FindAnyObjectByType<CombatManager>();
+                if (combatManager != null)
+                {
+                    combatManager.AddCombatLog(playerName + "'s guard has worn off.");
+                }
             }
         }
     }
@@ -66,7 +80,11 @@ public class PlayerCombatController : MonoBehaviour, IHealthInterface
 
         currentHealth -= damage;
 
-        Debug.Log(playerName + " takes " + damage + " damage.");
+        CombatManager combatManager = FindAnyObjectByType<CombatManager>();
+        if (combatManager != null)
+        {
+            combatManager.AddCombatLog(playerName + " takes " + damage + " damage.");
+        }
 
         if (healthBar != null)
         {
@@ -84,7 +102,11 @@ public class PlayerCombatController : MonoBehaviour, IHealthInterface
 
     private void Die()
     {
-        Debug.Log(playerName + " has been defeated.");
+        CombatManager combatManager = FindAnyObjectByType<CombatManager>();
+        if (combatManager != null)
+        {
+            combatManager.AddCombatLog(playerName + " has been defeated.");
+        }
     }
 
     public bool IsAlive()
