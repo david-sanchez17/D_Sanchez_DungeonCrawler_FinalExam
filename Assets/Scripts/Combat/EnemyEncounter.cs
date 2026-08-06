@@ -50,8 +50,8 @@ public class EnemyEncounter : MonoBehaviour
         }
         encounterStarted = true;
         Vector3 returnPosition = other.transform.position;
-        returnPosition.y = 1f;
-        returnPosition -= other.transform.forward * 1f;
+        returnPosition.y = 0f;
+        returnPosition -= other.transform.forward * 0f;
         BattleTransitionManager.Instance.SaveReturnPoint(SceneManager.GetActiveScene().name, returnPosition);
 
         BattleTransitionManager.Instance.SetCurrentEnemy(enemyID);
