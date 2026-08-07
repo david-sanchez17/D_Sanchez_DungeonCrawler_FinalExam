@@ -296,10 +296,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c80c4c5707d2d4cb9c7bbb96d6da36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyCombatController
-  enemyName: Goblin
-  maxHealth: 20
+  enemyName: The Forsaken King
+  maxHealth: 40
   attackPower: 8
-  defense: 2
+  defense: 5
   healthBar: {fileID: 6619622813265990010}
 --- !u!212 &5423197917702093873
 SpriteRenderer:
@@ -612,7 +612,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.44, y: 2.1}
+  m_AnchoredPosition: {x: 0.26, y: 5.15}
   m_SizeDelta: {x: 477.125, y: 191.929}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6314979983341977828
