@@ -25,6 +25,11 @@ public class BattleTransitionManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sceneName"></param>
+    /// <param name="playerPosition"></param>
     public void SaveReturnPoint(string sceneName, Vector3 playerPosition)
     {
         returnSceneName = sceneName;

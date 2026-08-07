@@ -59,7 +59,7 @@ public class CombatManager : MonoBehaviour
         Debug.Log("Players: " + players.Count);
         Debug.Log("Enemies: " + enemies.Count);
 
-        Debug.Log("Combat Begin");
+        AddCombatLog("Combat Begin");
         StartPlayerTurn();
     }
 
@@ -73,6 +73,10 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles combat log messages
+    /// </summary>
+    /// <param name="message"></param>
     public void AddCombatLog(string message)
     {
         if (OnCombatLog != null)
@@ -116,6 +120,10 @@ public class CombatManager : MonoBehaviour
         AddCombatLog("Select an enemy to attack");
     }
 
+    /// <summary>
+    /// Handles enemy selecting after pressing the attack button
+    /// </summary>
+    /// <param name="selectedEnemy"></param>
     public void SelectEnemy(EnemyCombatController selectedEnemy)
     {
         if (!waitingForTarget)
@@ -143,7 +151,9 @@ public class CombatManager : MonoBehaviour
         return waitingForTarget;
     }
 
-
+    /// <summary>
+    /// Called by the guard button
+    /// </summary>
     public void PlayerGuard()
     {
         if (currentState != CombatState.PlayerTurn)

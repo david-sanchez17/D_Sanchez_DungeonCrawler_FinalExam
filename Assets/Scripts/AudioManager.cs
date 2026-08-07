@@ -85,14 +85,4 @@ public class AudioManager : MonoBehaviour
         }
         sfxSource.Stop();
     }
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 }
