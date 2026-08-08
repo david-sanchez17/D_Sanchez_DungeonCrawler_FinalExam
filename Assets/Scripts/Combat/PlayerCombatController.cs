@@ -27,7 +27,11 @@ public class PlayerCombatController : MonoBehaviour, IHealthInterface
        
     }
 
-    public void Attack(EnemyCombatController enemy)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="enemy"></param>
+    public void Attack(IEnemyCombatant enemy)
     {
         if (enemy == null)
             return;
@@ -48,6 +52,9 @@ public class PlayerCombatController : MonoBehaviour, IHealthInterface
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void Guard()
     {
         temporaryDefenseBonus = guardDefenseBonus;
@@ -80,6 +87,10 @@ public class PlayerCombatController : MonoBehaviour, IHealthInterface
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="damage"></param>
     public void TakeDamage(int damage)
     {
         damage -= GetDefense();
@@ -111,7 +122,9 @@ public class PlayerCombatController : MonoBehaviour, IHealthInterface
     }
 
 
-
+    /// <summary>
+    /// Called when player dies.
+    /// </summary>
     private void Die()
     {
         CombatManager combatManager = FindAnyObjectByType<CombatManager>();

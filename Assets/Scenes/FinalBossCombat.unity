@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventSystem
-  m_FirstSelected: {fileID: 751352791}
+  m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &183042300
@@ -579,8 +579,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CombatManager
   players:
   - {fileID: 1744034155}
-  enemies:
-  - {fileID: 6362514789660750961, guid: 981bf3ea428175d4a8659b1c254ab5f1, type: 3}
 --- !u!4 &751352793
 Transform:
   m_ObjectHideFlags: 0
@@ -2518,8 +2516,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombatController
   playerName: Knight
-  maxHealth: 5
-  attackPower: 40
+  maxHealth: 45
+  attackPower: 10
   defense: 3
   guardDefenseBonus: 5
   healthBar: {fileID: 1203011669}
@@ -3053,15 +3051,15 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1203011670}
-  - {fileID: 1120632173}
-  - {fileID: 2009128786}
-  - {fileID: 234979183}
-  - {fileID: 1278038240}
   - {fileID: 1744034158}
-  - {fileID: 183042300}
-  - {fileID: 751352793}
+  - {fileID: 1203011670}
   - {fileID: 767960560}
+  - {fileID: 1120632173}
+  - {fileID: 234979183}
+  - {fileID: 751352793}
+  - {fileID: 1278038240}
+  - {fileID: 2009128786}
+  - {fileID: 183042300}
   - {fileID: 326614432}
   - {fileID: 1175523895}
   - {fileID: 2083496964}

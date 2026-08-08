@@ -2,7 +2,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyCombatController : MonoBehaviour, IHealthInterface
+public class EnemyCombatController : MonoBehaviour, IHealthInterface, IEnemyCombatant
 {
     [SerializeField] private string enemyName = "Goblin";
     [SerializeField] private int maxHealth = 20;
@@ -26,6 +26,11 @@ public class EnemyCombatController : MonoBehaviour, IHealthInterface
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="player"></param>
+
     public void Attack(PlayerCombatController player)
     {
         if (player == null)
@@ -47,6 +52,9 @@ public class EnemyCombatController : MonoBehaviour, IHealthInterface
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private void OnMouseDown()
     {
         CombatManager combatManager = FindAnyObjectByType<CombatManager>();
@@ -57,6 +65,10 @@ public class EnemyCombatController : MonoBehaviour, IHealthInterface
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="damage"></param>
     public void TakeDamage(int damage)
     {
         damage -= defense;
@@ -91,6 +103,9 @@ public class EnemyCombatController : MonoBehaviour, IHealthInterface
         }
     }
 
+    /// <summary>
+    /// Called when an enemy dies.
+    /// </summary>
     private void Die()
     {
         CombatManager combatManager = FindAnyObjectByType<CombatManager>();

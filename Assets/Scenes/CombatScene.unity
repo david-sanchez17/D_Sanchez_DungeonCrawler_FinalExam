@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0, g: 0, b: 0, a: 1}
   m_FogMode: 3
   m_FogDensity: 1
@@ -1075,7 +1075,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombatController
   playerName: Knight
-  maxHealth: 5
+  maxHealth: 45
   attackPower: 40
   defense: 3
   guardDefenseBonus: 5
@@ -1587,14 +1587,14 @@ MonoBehaviour:
   enemySfxSource: {fileID: 579872929}
   playerSfxSource: {fileID: 579872929}
   battleMusic: {fileID: 8300000, guid: e28216a4b8cbfcc43a7a0c98cdaccf0b, type: 3}
-  playerAttackClip: {fileID: 8300000, guid: 6a0d451e7d27145499d676a0c9ae613d, type: 3}
+  playerAttackClip: {fileID: 0}
   playerGuardClip: {fileID: 8300000, guid: 7a579226256361640897c4724947aecb, type: 3}
   playerHitClip: {fileID: 0}
   playerDeathClip: {fileID: 0}
   playerVictoryClip: {fileID: 0}
-  enemyAttackClip: {fileID: 8300000, guid: 73a91d0479869184581f78bb78b1cfaa, type: 3}
+  enemyAttackClip: {fileID: 0}
   enemyHitClip: {fileID: 0}
-  enemyDeathClip: {fileID: 0}
+  enemyDeathClip: {fileID: 8300000, guid: 7a579226256361640897c4724947aecb, type: 3}
 --- !u!4 &579872931
 Transform:
   m_ObjectHideFlags: 0

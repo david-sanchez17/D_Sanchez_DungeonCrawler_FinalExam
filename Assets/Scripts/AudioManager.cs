@@ -24,6 +24,7 @@ public class AudioManager : MonoBehaviour
         sfxSource.volume = sfxVolume;
     }
 
+
     public void SetMusicVolume(float volume)
     {
         musicSource.volume = volume;

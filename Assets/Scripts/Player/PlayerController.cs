@@ -56,6 +56,9 @@ public class PlayerController : MonoBehaviour
         RotatePlayer();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private void HandleInput()
     {
         if (Input.GetButtonDown("Forward"))
@@ -87,6 +90,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private void MovePlayer()
     {
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
@@ -98,6 +104,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private void RotatePlayer()
     {
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
@@ -110,6 +119,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="direction"></param>
     private void TryMove(Vector3 direction)
     {
         Vector3 destination = transform.position + direction * moveDistance;
@@ -128,7 +141,10 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Cannot move. Wall detected.");
         }
     }
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="clip"></param>
     private void PlaySound(AudioClip clip)
     {
         if (audioSource == null)

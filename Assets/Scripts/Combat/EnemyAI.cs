@@ -58,6 +58,10 @@ public class EnemyAI : MonoBehaviour
                 break;
         }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
     private void UpdatePatrol()
     {
         if (CanSeePlayer())
@@ -80,7 +84,9 @@ public class EnemyAI : MonoBehaviour
             }
         }
     }
-
+    /// <summary>
+    /// 
+    /// </summary>
     private void UpdateChase()
     {
         if (CanSeePlayer())
@@ -95,6 +101,9 @@ public class EnemyAI : MonoBehaviour
             agent.SetDestination(lastKnownPlayerPosition);
         }
     }
+    /// <summary>
+    /// 
+    /// </summary>
     private void UpdateSearch()
     {
         if (CanSeePlayer())
@@ -117,6 +126,10 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     private bool CanSeePlayer()
     {
         if (player == null)
@@ -144,6 +157,9 @@ public class EnemyAI : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private void ChoosePatrolPoint()
     {
         for (int i = 0; i <20; i++)

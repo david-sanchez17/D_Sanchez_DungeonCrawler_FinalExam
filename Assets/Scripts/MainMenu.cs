@@ -21,6 +21,7 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadSceneAsync("Level1");
     }
 
+
     public void OpenSettings()
     {
         mainMenu.SetActive(false);

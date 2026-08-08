@@ -2,11 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.XR;
 
 
 public class CombatManager : MonoBehaviour
@@ -23,7 +20,7 @@ public class CombatManager : MonoBehaviour
 
     [Header("Combatants")]
     [SerializeField] private List<PlayerCombatController> players = new List<PlayerCombatController>();
-    [SerializeField] private List<EnemyCombatController> enemies = new List<EnemyCombatController>();
+    [SerializeField] private List<IEnemyCombatant> enemies = new List<IEnemyCombatant>();
 
 
     private CombatState currentState;
@@ -52,13 +49,19 @@ public class CombatManager : MonoBehaviour
         yield return null;
         players.Clear();
         enemies.Clear();
+        PlayerCombatController[] playerObjects = FindObjectsByType<PlayerCombatController>();
+        players.AddRange(playerObjects);
 
-        players.AddRange(FindObjectsByType<PlayerCombatController>());
-        enemies.AddRange(FindObjectsByType<EnemyCombatController>());
-
-        Debug.Log("Players: " + players.Count);
-        Debug.Log("Enemies: " + enemies.Count);
-
+        EnemyCombatController[] normalEnemies = FindObjectsByType<EnemyCombatController>();
+        foreach (EnemyCombatController enemy in normalEnemies)
+        {
+            enemies.Add(enemy);
+        }
+        FinalBossAI[] bossEnemies = FindObjectsByType<FinalBossAI>();
+        foreach (FinalBossAI boss in bossEnemies)
+        {
+            enemies.Add(boss);
+        }
         AddCombatLog("Combat Begin");
         StartPlayerTurn();
     }
@@ -124,7 +127,7 @@ public class CombatManager : MonoBehaviour
     /// Handles enemy selecting after pressing the attack button
     /// </summary>
     /// <param name="selectedEnemy"></param>
-    public void SelectEnemy(EnemyCombatController selectedEnemy)
+    public void SelectEnemy(IEnemyCombatant selectedEnemy)
     {
         if (!waitingForTarget)
             return;
@@ -181,7 +184,7 @@ public class CombatManager : MonoBehaviour
         AddCombatLog("Enemy Turn");
 
 
-        foreach (EnemyCombatController enemy in enemies.ToList())
+        foreach (IEnemyCombatant enemy in enemies.ToList())
         {
             if (enemy != null && enemy.IsAlive())
             {
@@ -251,5 +254,5 @@ public class CombatManager : MonoBehaviour
         AddCombatLog("Defeat!");
         SceneManager.LoadSceneAsync("MainMenu");
 
-    }
+    } 
 }

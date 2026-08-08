@@ -38,11 +38,18 @@ public class BattleTransitionManager : MonoBehaviour
         returningFromBattle = false;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public bool HasReturnPoint()
     {
         return hasReturnPoint;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void ClearReturnPoint()
     {
         hasReturnPoint = false;
