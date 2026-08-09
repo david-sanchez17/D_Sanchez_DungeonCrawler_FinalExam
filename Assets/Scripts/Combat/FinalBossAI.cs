@@ -28,6 +28,11 @@ public class FinalBossAI : MonoBehaviour, IHealthInterface, IEnemyCombatant
         }
     }
 
+    /// <summary>
+    /// Performs the boss main attack
+    /// Player defense reduces amount of damage taken
+    /// </summary>
+    /// <param name="player"></param>
     public void Attack(PlayerCombatController player)
     {
         if (player == null)
@@ -49,6 +54,11 @@ public class FinalBossAI : MonoBehaviour, IHealthInterface, IEnemyCombatant
         }
     }
 
+    /// <summary>
+    /// Performs heavy attack
+    /// Deals more damage than base attack
+    /// </summary>
+    /// <param name="player"></param>
     public void HeavyAttack(PlayerCombatController player)
     {
         if (player == null)
@@ -70,6 +80,10 @@ public class FinalBossAI : MonoBehaviour, IHealthInterface, IEnemyCombatant
         }
     }
 
+    /// <summary>
+    /// Performs special attack
+    /// </summary>
+    /// <param name="player"></param>
     public void UndeadWrath(PlayerCombatController player)
     {
         if (player == null)
@@ -92,6 +106,11 @@ public class FinalBossAI : MonoBehaviour, IHealthInterface, IEnemyCombatant
         }
     }
 
+    /// <summary>
+    /// Applies incoming damage to the boss after calculating defense
+    /// updates health bar and defeats boss when health reaches zero
+    /// </summary>
+    /// <param name="damage"></param>
     public void TakeDamage (int damage)
     {
         damage -= defense;
@@ -114,6 +133,9 @@ public class FinalBossAI : MonoBehaviour, IHealthInterface, IEnemyCombatant
         }
     }
 
+    /// <summary>
+    /// Removes health bar, destroys boss, haldes everything that happens when final boss dies
+    /// </summary>
     private void Die()
     {
         CombatManager combatManager = FindAnyObjectByType<CombatManager>();
@@ -132,6 +154,9 @@ public class FinalBossAI : MonoBehaviour, IHealthInterface, IEnemyCombatant
         Destroy(gameObject);
     }
 
+    /// <summary>
+    /// Allows player to select the final boss by clicking on it
+    /// </summary>
     private void OnMouseDown()
     {
         CombatManager combatManager = FindAnyObjectByType<CombatManager>();

@@ -7,6 +7,8 @@ public class SceneLoader : MonoBehaviour
     public static SceneLoader Instance;
     [SerializeField] private GameObject loadingScreen;
     private const float MinimumLoadTime = 1.5f;
+    private const float SceneReadyProgress = 0.9f;
+    private const float InitialTimerValue = 0f;
 
     private void Awake()
     {
@@ -33,12 +35,12 @@ public class SceneLoader : MonoBehaviour
         }
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
         operation.allowSceneActivation = false;
-        float timer = 0f;
-
+        float timer = InitialTimerValue;
+        //Ryan pointed out some magic numbers, got rid of them and added constants
         while (!operation.isDone)
         {
             timer += Time.deltaTime;
-            if (operation.progress >= 0.9f)
+            if (operation.progress >= SceneReadyProgress)
             {
                 if (timer >= MinimumLoadTime)
                 {

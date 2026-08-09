@@ -10,7 +10,7 @@ public class PauseMenu : MonoBehaviour
    [SerializeField] private GameObject settingsPanel;
 
     public bool isPaused;
-    private bool settingsOpen;
+    public bool settingsOpen;
 
    private void Start()
     {
@@ -55,7 +55,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         settingsPanel.SetActive(false);
         Time.timeScale = 1f;
-        Debug.Log("Resume");
+       
     }
 
     public void OpenSettings()
@@ -63,7 +63,7 @@ public class PauseMenu : MonoBehaviour
         settingsOpen = true;
         pauseMenu.SetActive(false);
         settingsPanel.SetActive(true);
-        Debug.Log("Open settings");
+      
     }
 
     public void CloseSettings()

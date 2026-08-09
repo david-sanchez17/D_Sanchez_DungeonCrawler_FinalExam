@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Checks the configured input buttons, determines whether the player should move forward, backward, strafe left and/or right, and rotate
     /// </summary>
     private void HandleInput()
     {
@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Moves the player towards the target position at configured movement speed and stops movement when the target position is reached
     /// </summary>
     private void MovePlayer()
     {
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Rotates player toward the target rotation at configured rotation speed and stops movement when target rotatio is reached
     /// </summary>
     private void RotatePlayer()
     {
@@ -120,7 +120,8 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Attempts to move player in specified direction
+    /// checks for walls at the destination before allowing movement
     /// </summary>
     /// <param name="direction"></param>
     private void TryMove(Vector3 direction)
@@ -142,7 +143,7 @@ public class PlayerController : MonoBehaviour
         }
     }
     /// <summary>
-    /// 
+    /// plays walk audio clip 
     /// </summary>
     /// <param name="clip"></param>
     private void PlaySound(AudioClip clip)
