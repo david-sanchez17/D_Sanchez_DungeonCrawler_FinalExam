@@ -17,6 +17,15 @@ public class CombatManager : MonoBehaviour
         Defeat
     }
 
+    [Header("Final Boss")]
+    [SerializeField] private FinalBossAI finalboss;
+    [SerializeField] private GameObject victoryPanel;
+
+    [Header("Combat UI")]
+    [SerializeField] private GameObject attackButton;
+    [SerializeField] private GameObject guardButton;
+    [SerializeField] private GameObject combatLog;
+    [SerializeField] private GameObject playerHealthBar;
 
     [Header("Combatants")]
     [SerializeField] private List<PlayerCombatController> players = new List<PlayerCombatController>();
@@ -31,7 +40,13 @@ public class CombatManager : MonoBehaviour
     public event Action<string> OnCombatLog;
 
 
-
+    private void Awake()
+    {
+        if (victoryPanel != null)
+        {
+            victoryPanel.SetActive(false);
+        }
+    }
     private void Start()
     {
         StartCoroutine(InitializeCombat());
@@ -41,6 +56,7 @@ public class CombatManager : MonoBehaviour
 
     /// <summary>
     /// Waits one frame before finding enemies. This allows spawned enemies to finish creating.
+    /// Final boss is assigned
     /// </summary>
     /// 
    
@@ -225,23 +241,72 @@ public class CombatManager : MonoBehaviour
         players.RemoveAll(player => player == null || !player.IsAlive());
     }
 
+    private void ShowFinalBossVictory()
+    {
+       if (victoryPanel != null)
+        {
+            victoryPanel.SetActive(true);
+        }
+        if (attackButton != null)
+        {
+            attackButton.SetActive(false);
+        }
+        if (guardButton != null)
+        {
+            guardButton.SetActive(false);
+        }
+        if (playerHealthBar != null)
+        {
+            playerHealthBar.SetActive(false);
+        }
+        if (combatLog != null)
+        {
+            combatLog.SetActive(false);
+        }
+        if (CombatAudioManager.Instance != null)
+        {
+            CombatAudioManager.Instance.StopBattleMusic();
+        }
+    }
+
+    private void ReturnFromNormalBattle()
+    {
+        BattleTransitionManager.Instance.MarkEnemyDefeated(BattleTransitionManager.Instance.GetCurrentEnemy());
+        BattleTransitionManager.Instance.StartReturningFromBattle();
+        SceneManager.LoadScene(BattleTransitionManager.Instance.GetReturnScene());
+    }
+
+
     /// <summary>
     /// Called when all enemies are defeated.
+    /// Normal battles return through the battle transition manager
+    /// final boss displays victory screen instead
     /// </summary>
     private void Victory()
     {
         ChangeState(CombatState.Victory);
-
-        AddCombatLog("Victory!");
-        if (BattleTransitionManager.Instance == null)
+        waitingForTarget = false;
+        if (attackButton != null)
         {
-            Debug.LogError("BATTLE TRANSITIONER IS FUCKING NULL IN COMBATSCENE");
-                return;
+            attackButton.SetActive(false);
         }
-        BattleTransitionManager.Instance.MarkEnemyDefeated(BattleTransitionManager.Instance.GetCurrentEnemy());
-        BattleTransitionManager.Instance.StartReturningFromBattle();
-        SceneManager.LoadScene(BattleTransitionManager.Instance.GetReturnScene());
-       
+        if (guardButton != null)
+        {
+            guardButton.SetActive(false);
+        }
+        AddCombatLog("Victory");
+        if (finalboss != null)
+        {
+            ShowFinalBossVictory();
+            return;
+        }
+        ReturnFromNormalBattle();
+    }
+
+   public void ReturnToMainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
     }
 
     /// <summary>

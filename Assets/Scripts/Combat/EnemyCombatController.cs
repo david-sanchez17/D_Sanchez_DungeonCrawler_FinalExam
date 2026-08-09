@@ -66,7 +66,7 @@ public class EnemyCombatController : MonoBehaviour, IHealthInterface, IEnemyComb
     }
 
     /// <summary>
-    /// 
+    /// Applies damage to enemy after accounting for defense.
     /// </summary>
     /// <param name="damage"></param>
     public void TakeDamage(int damage)

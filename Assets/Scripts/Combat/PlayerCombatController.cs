@@ -28,9 +28,10 @@ public class PlayerCombatController : MonoBehaviour, IHealthInterface
     }
 
     /// <summary>
-    /// 
+    /// Attacks an enemy and calculates the damage based on player attack power and enemy defense.
     /// </summary>
     /// <param name="enemy"></param>
+    /// Enemy receives the attack.
     public void Attack(IEnemyCombatant enemy)
     {
         if (enemy == null)
@@ -53,7 +54,7 @@ public class PlayerCombatController : MonoBehaviour, IHealthInterface
     }
 
     /// <summary>
-    /// 
+    /// Temporarily increases player defense for two turns.
     /// </summary>
     public void Guard()
     {
@@ -88,7 +89,7 @@ public class PlayerCombatController : MonoBehaviour, IHealthInterface
     }
 
     /// <summary>
-    /// 
+    /// Applies damage to the player after accounting for players current defense.
     /// </summary>
     /// <param name="damage"></param>
     public void TakeDamage(int damage)
